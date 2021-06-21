@@ -7,6 +7,8 @@ import FormikStepper from './FormikStepper';
 import { FormikStep } from './FormikStep';
 import { FIELD_NAMES } from './constant';
 
+const sleep = (time: number) => new Promise(acc => setTimeout(acc, time));
+
 const HomePage: FC = () => {
 	const { FIRST_NAME, LAST_NAME, MONEY, MILLIONAIRE, DESCRIPTION } =
 		FIELD_NAMES;
@@ -37,8 +39,9 @@ const HomePage: FC = () => {
 						[MONEY.name]: 0,
 						[DESCRIPTION.name]: '',
 					}}
-					onSubmit={values => {
-						console.log(values);
+					onSubmit={async values => {
+						await sleep(3000);
+						console.log('values', values);
 					}}
 				>
 					<FormikStep label='Personal Data' validationSchema={InforSchema}>

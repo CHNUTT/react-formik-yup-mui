@@ -33,7 +33,8 @@
 		],
 		"no-use-before-define": "off",
 		"@typescript-eslint/no-use-before-define": ["error"],
-		"no-unused-vars": "warn"
+		"no-unused-vars": "warn",
+		"no-nested-ternary": "warn"
 	},
 	"settings": {
 		"import/resolver": {
