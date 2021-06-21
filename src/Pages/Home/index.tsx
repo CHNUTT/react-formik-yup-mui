@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { Box, Button, Card, CardContent } from '@material-ui/core';
+import { Box, Card, CardContent } from '@material-ui/core';
 import { Field } from 'formik';
 import { CheckboxWithLabel, TextField } from 'formik-material-ui';
 import * as Yup from 'yup';
@@ -41,7 +41,7 @@ const HomePage: FC = () => {
 						console.log(values);
 					}}
 				>
-					<FormikStep validationSchema={InforSchema}>
+					<FormikStep label='Personal Data' validationSchema={InforSchema}>
 						<Box paddingBottom={2}>
 							<Field
 								fullWidth
@@ -67,7 +67,7 @@ const HomePage: FC = () => {
 							/>
 						</Box>
 					</FormikStep>
-					<FormikStep validationSchema={MoneySchema}>
+					<FormikStep label='Bank Accounts' validationSchema={MoneySchema}>
 						<Box paddingBottom={2}>
 							<Field
 								fullWidth
@@ -78,7 +78,7 @@ const HomePage: FC = () => {
 							/>
 						</Box>
 					</FormikStep>
-					<FormikStep>
+					<FormikStep label='More Info'>
 						<Box paddingBottom={2}>
 							<Field
 								fullWidth
@@ -88,10 +88,6 @@ const HomePage: FC = () => {
 							/>
 						</Box>
 					</FormikStep>
-
-					<Button variant='outlined' type='submit'>
-						Submit
-					</Button>
 				</FormikStepper>
 			</CardContent>
 		</Card>

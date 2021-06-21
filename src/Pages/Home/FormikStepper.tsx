@@ -1,4 +1,4 @@
-import { Button } from '@material-ui/core';
+import { Button, Step, StepLabel, Stepper } from '@material-ui/core';
 import { Form, Formik, FormikConfig, FormikValues } from 'formik';
 import { Children, ReactElement, useState } from 'react';
 import { useStyle } from './styles';
@@ -12,7 +12,8 @@ const FormikStepper = ({ children, ...props }: FormikConfig<FormikValues>) => {
 	const currentChild = childrenArray[step] as ReactElement<FormikStepProps>;
 	const classes = useStyle();
 
-	console.log('children', currentChild.props.validationSchema);
+	// console.log('children', currentChild.props.validationSchema);
+	// console.log('childrenArray', childrenArray.length);
 
 	const isLastStep = () => step === childrenArray.length - 1;
 
@@ -29,6 +30,13 @@ const FormikStepper = ({ children, ...props }: FormikConfig<FormikValues>) => {
 			}}
 		>
 			<Form autoComplete='off' className={classes.form}>
+				<Stepper alternativeLabel activeStep={step}>
+					{childrenArray.map(child => (
+						<Step key={child.props.label}>
+							<StepLabel>{child.props.label}</StepLabel>
+						</Step>
+					))}
+				</Stepper>
 				{currentChild}
 				<div>
 					{step > 0 && (
