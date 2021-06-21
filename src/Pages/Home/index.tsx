@@ -1,17 +1,22 @@
 import { FC } from 'react';
-import { Button, Card, CardContent } from '@material-ui/core';
+import { Box, Button, Card, CardContent } from '@material-ui/core';
 import { Field } from 'formik';
 import { CheckboxWithLabel, TextField } from 'formik-material-ui';
 import * as Yup from 'yup';
-import FormikStepper from './stepper';
+import FormikStepper from './FormikStepper';
+import { FormikStep } from './FormikStep';
 import { FIELD_NAMES } from './constant';
 
 const HomePage: FC = () => {
 	const { FIRST_NAME, LAST_NAME, MONEY, MILLIONAIRE, DESCRIPTION } =
 		FIELD_NAMES;
 
-	const BankSchema = Yup.object().shape({
-		money: Yup.mixed().when(MILLIONAIRE.name, {
+	const InforSchema = Yup.object().shape({
+		[FIRST_NAME.name]: Yup.string().required().min(2),
+	});
+
+	const MoneySchema = Yup.object().shape({
+		[MONEY.name]: Yup.mixed().when(MILLIONAIRE.name, {
 			is: true,
 			then: Yup.number().min(
 				1_000_000,
@@ -19,14 +24,12 @@ const HomePage: FC = () => {
 			),
 			otherwise: Yup.number().required(),
 		}),
-		firstName: Yup.string().min(3, 'Name'),
 	});
 
 	return (
 		<Card>
 			<CardContent>
 				<FormikStepper
-					validationSchema={BankSchema}
 					initialValues={{
 						[FIRST_NAME.name]: '',
 						[LAST_NAME.name]: '',
@@ -38,39 +41,53 @@ const HomePage: FC = () => {
 						console.log(values);
 					}}
 				>
-					<div>
-						<Field
-							name='{FIRST_NAME.name}'
-							component={TextField}
-							label={FIRST_NAME.label}
-						/>
-						<Field
-							name={LAST_NAME.name}
-							component={TextField}
-							label={LAST_NAME.label}
-						/>
-						<Field
-							name={MILLIONAIRE.name}
-							type='checkbox'
-							component={CheckboxWithLabel}
-							Label={{ label: MILLIONAIRE.label }}
-						/>
-					</div>
-					<div>
-						<Field
-							name={MONEY.name}
-							type='number'
-							component={TextField}
-							label={MONEY.label}
-						/>
-					</div>
-					<div>
-						<Field
-							name={DESCRIPTION.name}
-							component={TextField}
-							label={DESCRIPTION.label}
-						/>
-					</div>
+					<FormikStep validationSchema={InforSchema}>
+						<Box paddingBottom={2}>
+							<Field
+								fullWidth
+								name={FIRST_NAME.name}
+								component={TextField}
+								label={FIRST_NAME.label}
+							/>
+						</Box>
+						<Box paddingBottom={2}>
+							<Field
+								fullWidth
+								name={LAST_NAME.name}
+								component={TextField}
+								label={LAST_NAME.label}
+							/>
+						</Box>
+						<Box paddingBottom={2}>
+							<Field
+								name={MILLIONAIRE.name}
+								type='checkbox'
+								component={CheckboxWithLabel}
+								Label={{ label: MILLIONAIRE.label }}
+							/>
+						</Box>
+					</FormikStep>
+					<FormikStep validationSchema={MoneySchema}>
+						<Box paddingBottom={2}>
+							<Field
+								fullWidth
+								name={MONEY.name}
+								type='number'
+								component={TextField}
+								label={MONEY.label}
+							/>
+						</Box>
+					</FormikStep>
+					<FormikStep>
+						<Box paddingBottom={2}>
+							<Field
+								fullWidth
+								name={DESCRIPTION.name}
+								component={TextField}
+								label={DESCRIPTION.label}
+							/>
+						</Box>
+					</FormikStep>
 
 					<Button variant='outlined' type='submit'>
 						Submit

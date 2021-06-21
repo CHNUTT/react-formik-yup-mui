@@ -4,6 +4,5 @@ export const useStyle = makeStyles({
 	form: {
 		display: 'flex',
 		flexDirection: 'column',
-		// justifyContent: 'center',
 	},
 });
