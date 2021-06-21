@@ -17,15 +17,13 @@ const Navbar = () => {
 	const classes = useStyles();
 
 	return (
-		<div className={classes.root}>
-			<AppBar position='static'>
-				<Toolbar>
-					<Typography variant='h6' className={classes.title}>
-						News
-					</Typography>
-				</Toolbar>
-			</AppBar>
-		</div>
+		<AppBar className={classes.root} position='static'>
+			<Toolbar>
+				<Typography variant='h6' className={classes.title}>
+					News
+				</Typography>
+			</Toolbar>
+		</AppBar>
 	);
 };
 
