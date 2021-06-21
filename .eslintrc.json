@@ -19,6 +19,7 @@
 			1,
 			{ "extensions": [".js", ".jsx", ".ts", ".tsx"] }
 		],
+		"react/jsx-props-no-spreading": "off",
 		"import/prefer-default-export": "off",
 		"import/extensions": [
 			"error",
@@ -31,7 +32,8 @@
 			}
 		],
 		"no-use-before-define": "off",
-		"@typescript-eslint/no-use-before-define": ["error"]
+		"@typescript-eslint/no-use-before-define": ["error"],
+		"no-unused-vars": "warn"
 	},
 	"settings": {
 		"import/resolver": {

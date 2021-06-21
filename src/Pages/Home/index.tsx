@@ -1,21 +1,12 @@
 import { FC } from 'react';
 import { Button, Card, CardContent } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
-import { Field, Form, Formik } from 'formik';
+import { Field } from 'formik';
 import { CheckboxWithLabel, TextField } from 'formik-material-ui';
 import * as Yup from 'yup';
+import FormikStepper from './stepper';
 import { FIELD_NAMES } from './constant';
 
-const useStyle = makeStyles({
-	form: {
-		display: 'flex',
-		justifyContent: 'center',
-	},
-});
-
 const HomePage: FC = () => {
-	const classes = useStyle();
-
 	const { FIRST_NAME, LAST_NAME, MONEY, MILLIONAIRE, DESCRIPTION } =
 		FIELD_NAMES;
 
@@ -34,7 +25,7 @@ const HomePage: FC = () => {
 	return (
 		<Card>
 			<CardContent>
-				<Formik
+				<FormikStepper
 					validationSchema={BankSchema}
 					initialValues={{
 						[FIRST_NAME.name]: '',
@@ -47,7 +38,7 @@ const HomePage: FC = () => {
 						console.log(values);
 					}}
 				>
-					<Form autoComplete='off' className={classes.form}>
+					<div>
 						<Field
 							name='{FIRST_NAME.name}'
 							component={TextField}
@@ -64,22 +55,27 @@ const HomePage: FC = () => {
 							component={CheckboxWithLabel}
 							Label={{ label: MILLIONAIRE.label }}
 						/>
+					</div>
+					<div>
 						<Field
 							name={MONEY.name}
 							type='number'
 							component={TextField}
 							label={MONEY.label}
 						/>
+					</div>
+					<div>
 						<Field
 							name={DESCRIPTION.name}
 							component={TextField}
 							label={DESCRIPTION.label}
 						/>
-						<Button variant='outlined' type='submit'>
-							Submit
-						</Button>
-					</Form>
-				</Formik>
+					</div>
+
+					<Button variant='outlined' type='submit'>
+						Submit
+					</Button>
+				</FormikStepper>
 			</CardContent>
 		</Card>
 	);
