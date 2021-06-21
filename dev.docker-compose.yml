@@ -1,0 +1,14 @@
+version: '3'
+
+services:
+  client-dev:
+    build:
+      context: .
+      dockerfile: dev.Dockerfile
+    volumes:
+      - .:/app
+      - /app/node_modules
+    ports:
+      - '5000:3000'
+    environment:
+      NODE_ENV: development
